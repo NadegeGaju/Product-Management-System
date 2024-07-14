@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Update Product</h1>
+<form th:action="@{/products/edit/{id}(id=${productForm.id})}" th:object="${productForm}" method="post">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" step="0.01" min="0" th:field="*{price}" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="0" th:field="*{quantity}" required>
+
+    <!-- You may include category selection here if needed -->
+    <!-- Example:
+    <label for="category">Category:</label>
+    <select id="category" name="category" th:field="*{category}">
+        <option value="">Select a category</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    -->
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
